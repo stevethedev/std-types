@@ -27,6 +27,7 @@
     "fix:format": "prettier --write .",
     "fix:lint": "eslint --fix .",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "plop": "plop"
   },
   "devDependencies": {
