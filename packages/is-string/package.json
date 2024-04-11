@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-string",
+  "description": "Type checking for string primitives",
+  "version": "0.0.0",
+  "private": true
+}
