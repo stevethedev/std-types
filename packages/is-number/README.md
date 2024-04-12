@@ -11,7 +11,7 @@ npm install @std-types/is-number
 ## Usage
 
 ```ts
-import { isNumber } from "@std-types/is-number";
+import isNumber from "@std-types/is-number";
 
 console.log(isNumber(42)); // true
 console.log(isNumber("42")); // false
