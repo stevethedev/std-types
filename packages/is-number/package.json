@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-number",
+  "description": "Type check numbers",
+  "version": "0.0.0",
+  "private": true
+}
