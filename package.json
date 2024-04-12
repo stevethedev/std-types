@@ -61,6 +61,9 @@
     "extensionsToTreatAsEsm": [
       ".ts"
     ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
     "moduleNameMapper": {
       "^@std-types/([^/]+)$": "<rootDir>/packages/$1"
     },
