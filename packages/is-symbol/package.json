@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-symbol",
+  "description": "Type-checking library for symbols",
+  "version": "0.0.0",
+  "private": true
+}
