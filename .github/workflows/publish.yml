@@ -91,7 +91,7 @@ jobs:
                   if [ "true" == "$(jq -r '.version | test("^\\d+\\.\\d+\\.\\d+-.+$")' package.json)" ]; then
                     TAG="canary"
                   fi
-                  npm publish --tag "$TAG" --access public $@ || true
+                  npm publish --tag "$TAG" --access public $@
                 fi
                 popd
               fi
