@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-none-of",
+  "description": "Check whether a value matches none of the given guards",
+  "version": "0.0.0",
+  "private": true
+}
