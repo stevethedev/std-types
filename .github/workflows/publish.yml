@@ -48,9 +48,8 @@ jobs:
       - name: Create Release Pull Request
         uses: changesets/action@v1
         id: changesets
-        with:
-          changesetBranch: main
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Packages # Use the commit hash as the suffix
         run: npm run build -- --suffix=${{ steps.get-suffix.outputs.suffix }} ${{ steps.get-changed-packages.outputs.changedPackages }}
