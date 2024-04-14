@@ -26,9 +26,8 @@
     "fix:format": "prettier --write .",
     "fix:lint": "eslint --fix .",
     "test": "npm-run-all test:jsdom test:node",
-    "test:jsdom": "jest --env=jest-environment-jsdom",
-    "test:node": "jest --env=node",
-    "test:coverage": "npm run test -- -- --coverage",
+    "test:jsdom": "jest --env=jest-environment-jsdom --coverage",
+    "test:node": "jest --env=node --coverage",
     "plop": "plop"
   },
   "devDependencies": {
