@@ -88,9 +88,8 @@ jobs:
                 pushd "$package"
                 if [ -f "package.json" ]; then
                   TAG="latest"
-                  MATCH="$(jq -r '.version | capture("^\\d+\\.\\d+\\.\\d+-(?<tag>.+)$") | .tag' package.json)"
-                  if [ -n "$MATCH" ]; then
-                    TAG="$MATCH"
+                  if [ "true" == "$(jq -r '.version | test("^\\d+\\.\\d+\\.\\d+-.+$")' package.json)" ]; then
+                    TAG="canary"
                   fi
                   npm publish --tag "$TAG" --access public $@ || true
                 fi
@@ -100,5 +99,4 @@ jobs:
           }
 
           publish --dry-run
-
-#          publish
+          publish

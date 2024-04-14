@@ -112,6 +112,7 @@ const buildPackage = async (pkg, suffix, suffixedPackageNames) => {
     devDependencies,
     peerDependencies,
     version,
+    scripts = {},
     ...packageJson
   } = await readPackageJson(pkg);
 
@@ -121,6 +122,7 @@ const buildPackage = async (pkg, suffix, suffixedPackageNames) => {
   await writePackageJson(pkg, {
     ...packageJson,
     name,
+    scripts,
     private: undefined,
     version: newVersion,
     main: "index.cjs",
