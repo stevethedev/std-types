@@ -72,7 +72,6 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Download
         uses: actions/download-artifact@v4
@@ -80,6 +79,8 @@ jobs:
           name: dist
 
       - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           publish() {
             for package in $(ls) ; do
