@@ -5,13 +5,31 @@ import { fileURLToPath } from "url";
 import { dtsPlugin } from "esbuild-plugin-d.ts";
 
 const main = async () => {
+  const suffix = getSuffix();
+  const suffixedPackageNames = await getSuffixedPackageNames();
   await rm(getOutputsPath(), { recursive: true, force: true });
   const packages = await getPackages();
   await Promise.all(
     packages.map(async (pkg) => {
-      await buildPackage(pkg);
+      await buildPackage(pkg, suffix, suffixedPackageNames);
     }),
   );
+};
+
+const getSuffixedPackageNames = async () => {
+  return process.argv
+    .filter((arg) => arg.startsWith("--suffix-package="))
+    .map((arg) => arg.split("=")[1]);
+};
+
+const getSuffix = () => {
+  const suffix =
+    process.argv.find((arg) => arg.startsWith("--suffix="))?.split("=")[1] ??
+    "";
+  if (!/^[a-zA-Z0-9-]*$/.test(suffix)) {
+    throw new Error(`Invalid suffix: ${suffix}`);
+  }
+  return suffix;
 };
 
 const getPackagesPath = (...subPath) => getRootPath("packages", ...subPath);
@@ -37,7 +55,7 @@ const getPackages = async () => {
     .map((mappedPath) => mappedPath.path);
 };
 
-const buildPackage = async (pkg) => {
+const buildPackage = async (pkg, suffix, suffixedPackageNames) => {
   const entryPoint = "index.ts";
   const tsconfig = readTsConfig();
 
@@ -88,12 +106,23 @@ const buildPackage = async (pkg) => {
   }
 
   const basePackageJson = await readBasePackageJson();
-  const { dependencies, devDependencies, peerDependencies, ...packageJson } =
-    await readPackageJson(pkg);
+  const {
+    name,
+    dependencies,
+    devDependencies,
+    peerDependencies,
+    version,
+    ...packageJson
+  } = await readPackageJson(pkg);
+
+  const isSuffixed = suffixedPackageNames.includes(name);
+  const newVersion = isSuffixed ? `${version}-${suffix}` : `${version}`;
 
   await writePackageJson(pkg, {
     ...packageJson,
+    name,
     private: undefined,
+    version: newVersion,
     main: "index.cjs",
     module: "index.mjs",
     types: "index.d.ts",
