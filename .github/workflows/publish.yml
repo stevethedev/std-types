@@ -82,7 +82,7 @@ jobs:
 
       - name: Publish
         run: |
-          publish() 
+          publish() {
             for package in $(ls) ; do
               if [ -d "$package" ]; then
                 pushd "$package"
