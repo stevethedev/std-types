@@ -82,10 +82,23 @@ jobs:
 
       - name: Publish
         run: |
-          for package in $(ls) ; do
-            if [ -d "$package" ]; then
-              pushd "$package"
-              npm publish --access public --dry-run || true
-              popd
-            fi
-          done
+          publish() 
+            for package in $(ls) ; do
+              if [ -d "$package" ]; then
+                pushd "$package"
+                if [ -f "package.json" ]; then
+                  TAG="latest"
+                  MATCH="$(jq -r '.version | capture("^\\d+\\.\\d+\\.\\d+-(?<tag>.+)$") | .tag' package.json)"
+                  if [ -n "$MATCH" ]; then
+                    TAG="$MATCH"
+                  fi
+                  npm publish --tag "$TAG" --access public $@ || true
+                fi
+                popd
+              fi
+            done
+          }
+
+          publish --dry-run
+
+#          publish
