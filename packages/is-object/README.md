@@ -11,5 +11,9 @@ npm install @std-types/is-object
 ## Usage
 
 ```ts
-import myFunction from "@std-types/is-object";
+import isObject from "@std-types/is-object";
+
+isObject({}); // true
+isObject([]); // false
+isObject(null); // false
 ```
