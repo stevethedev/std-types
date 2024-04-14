@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-undefined",
+  "description": "Check whether values are undefined.",
+  "version": "0.0.0",
+  "private": true
+}

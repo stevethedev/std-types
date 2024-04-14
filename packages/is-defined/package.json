@@ -1,0 +1,6 @@
+{
+  "name": "@std-types/is-defined",
+  "description": "Check whether values are defined.",
+  "version": "0.0.0",
+  "private": true
+}
