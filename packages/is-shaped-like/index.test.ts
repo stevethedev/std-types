@@ -6,6 +6,16 @@ import isString from "@std-types/is-string";
 import isUndefined from "@std-types/is-undefined";
 
 describe("isShapedLike", () => {
+  it("returns false when the value is not an object", () => {
+    const value = 1;
+    const shape = {
+      a: isNumber,
+      b: isString,
+    };
+
+    expect(isShapedLike(value, shape)).toBe(false);
+  });
+
   it("returns true when the object is shaped like the shape", () => {
     const value = {
       a: 1,
