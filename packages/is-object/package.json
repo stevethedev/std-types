@@ -1,6 +1,6 @@
 {
   "name": "@std-types/is-object",
   "description": "Type-checking library for objects.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true
 }
