@@ -1,6 +1,6 @@
 {
   "name": "@std-types/is-all-of",
   "description": "Checks whether an element matches all of the given criteria",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true
 }
