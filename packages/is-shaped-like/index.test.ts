@@ -77,4 +77,33 @@ describe("isShapedLike", () => {
 
     expect(isShapedLike(value, shape)).toBe(true);
   });
+
+  it("throws an error when the shape is not an object", () => {
+    const value = {
+      a: 1,
+      b: "hello",
+    };
+
+    const shape = 1;
+
+    expect(() => isShapedLike(value, shape as any)).toThrowError(
+      "Expected object, got number",
+    );
+  });
+
+  it("throws an error when the shape is not a function", () => {
+    const value = {
+      a: 1,
+      b: "hello",
+    };
+
+    const shape = {
+      a: isNumber,
+      b: 1,
+    };
+
+    expect(() => isShapedLike(value, shape as any)).toThrowError(
+      "Expected function, got number",
+    );
+  });
 });
