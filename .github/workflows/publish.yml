@@ -87,6 +87,10 @@ jobs:
               if [ -d "$package" ]; then
                 pushd "$package"
                 if [ -f "package.json" ]; then
+                  PACKAGE_VERSION="$(jq -r '(.name + "@" + .version)' package.json)"
+                  if ! npm info "$PACKAGE_VERSION" > /dev/null 2>&1; then
+                    continue
+                  fi
                   TAG="latest"
                   if [ "true" == "$(jq -r '.version | test("^\\d+\\.\\d+\\.\\d+-.+$")' package.json)" ]; then
                     TAG="canary"
