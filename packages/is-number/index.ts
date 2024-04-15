@@ -3,7 +3,10 @@ export interface Options {
   Infinity?: boolean;
 }
 
-export default (data: unknown, options?: Options): data is number => {
+export default function isNumber(
+  data: unknown,
+  options?: Options,
+): data is number {
   if (typeof data !== "number") {
     return false;
   }
@@ -17,4 +20,10 @@ export default (data: unknown, options?: Options): data is number => {
   }
 
   return true;
-};
+}
+
+export type IsNumberFn = (data: unknown, options?: Options) => data is number;
+export const getIsNumber =
+  (defaultOptions?: Options): IsNumberFn =>
+  (data, options): data is number =>
+    isNumber(data, { ...defaultOptions, ...options });

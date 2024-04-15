@@ -1,5 +1,11 @@
 # @std-types/is-number
 
+## 1.1.0
+
+### Minor Changes
+
+- Add `getIsNumber` function.
+
 ## 1.0.0
 
 ### Major Changes

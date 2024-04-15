@@ -1,4 +1,4 @@
-import isNumber from "./index";
+import isNumber, { getIsNumber } from "./index";
 
 describe("isNumber", () => {
   it("should return true for numbers", () => {
@@ -80,5 +80,67 @@ describe("isNumber", () => {
     expect(isNumber(-Infinity, { Infinity: false })).toBe(false);
     expect(isNumber(Infinity, { Infinity: true })).toBe(true);
     expect(isNumber(-Infinity, { Infinity: true })).toBe(true);
+  });
+});
+
+describe("getIsNumber", () => {
+  it("should return a function that returns true for numbers", () => {
+    const check = getIsNumber();
+    const value = 1;
+
+    expect(check(value)).toBe(true);
+  });
+
+  it("should return a function that returns true for numbers with options.Infinity", () => {
+    const check = getIsNumber({ Infinity: true });
+    const value = 1;
+
+    expect(check(value)).toBe(true);
+  });
+
+  it("should return a function that returns true for numbers with options.NaN", () => {
+    const check = getIsNumber({ NaN: true });
+    const value = 1;
+
+    expect(check(value)).toBe(true);
+  });
+
+  it("should return a function that returns false for non-numbers", () => {
+    const check = getIsNumber();
+    const value = "1";
+
+    expect(check(value)).toBe(false);
+  });
+
+  it("should return a function that returns false for non-numbers with options.NaN", () => {
+    const check = getIsNumber({ NaN: true });
+    const value = "1";
+
+    expect(check(value)).toBe(false);
+  });
+
+  it("should return a function that returns false for non-numbers with options.Infinity", () => {
+    const check = getIsNumber({ Infinity: true });
+    const value = "1";
+
+    expect(check(value)).toBe(false);
+  });
+
+  it("should allow configurable NaN checks", () => {
+    const check = getIsNumber({ NaN: false });
+    const value = NaN;
+
+    expect(check(value)).toBe(false);
+    expect(check(value, { NaN: false })).toBe(false);
+    expect(check(value, { NaN: true })).toBe(true);
+  });
+
+  it("should allow configurable Infinity checks", () => {
+    const check = getIsNumber({ Infinity: false });
+    const value = Infinity;
+
+    expect(check(value)).toBe(false);
+    expect(check(value, { Infinity: false })).toBe(false);
+    expect(check(value, { Infinity: true })).toBe(true);
   });
 });
