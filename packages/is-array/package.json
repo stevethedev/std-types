@@ -1,6 +1,6 @@
 {
   "name": "@std-types/is-array",
   "description": "Type-checking library for arrays.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true
 }
