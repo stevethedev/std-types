@@ -1,0 +1,9 @@
+{
+  "name": "@std-types/is-shaped-like",
+  "description": "Utility type-checker for detecting the shape of an object",
+  "version": "0.0.0",
+  "private": true,
+  "peerDependencies": {
+    "@std-types/is-object": "*"
+  }
+}
