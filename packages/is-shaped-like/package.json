@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "peerDependencies": {
+    "@std-types/is-function": "*",
     "@std-types/is-object": "*"
   }
 }
