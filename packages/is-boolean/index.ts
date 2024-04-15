@@ -1,1 +1,1 @@
-export default (data: unknown): boolean => typeof data === "boolean";
+export default (data: unknown): data is boolean => typeof data === "boolean";
