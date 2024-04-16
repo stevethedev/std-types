@@ -88,7 +88,8 @@ jobs:
                 pushd "$package"
                 if [ -f "package.json" ]; then
                   PACKAGE_VERSION="$(jq -r '(.name + "@" + .version)' package.json)"
-                  if ! npm info "$PACKAGE_VERSION" > /dev/null 2>&1; then
+                  echo "Publishing $PACKAGE_VERSION"
+                  if ! npm info "$PACKAGE_VERSION" ; then
                     continue
                   fi
                   TAG="latest"
