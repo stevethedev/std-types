@@ -1,5 +1,11 @@
 # @std-types/is-number
 
+## 1.2.0
+
+### Minor Changes
+
+- 8568a1c: Stop checking for NaN and Infinity, to play better with TypeScript.
+
 ## 1.1.0
 
 ### Minor Changes
