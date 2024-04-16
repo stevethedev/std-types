@@ -1,6 +1,6 @@
 {
   "name": "@std-types/is-instance-of",
   "description": "Check whether a given value is an instance of some class",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true
 }
