@@ -66,7 +66,7 @@ jobs:
       - name: Get Package Matrix
         id: create-matrix
         run: |
-          echo "matrix=$(ls dist | jq -c -R -s 'split("\n") | map(select(. != "")) | {packages: map({package: .})}')" >> $GITHUB_OUTPUT
+          echo "matrix=$(ls dist | jq -c -R -s 'split("\n") | map(select(. != "")) | {package: map(.)}')" >> $GITHUB_OUTPUT
 
   publish:
     name: Publish @std-types/${{ matrix.package }}
