@@ -1,7 +1,7 @@
 {
   "name": "@std-types/assert-type",
   "description": "Assert that a value is the given type",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "peerDependencies": {
     "@std-types/is-function": "^1.0.0",
