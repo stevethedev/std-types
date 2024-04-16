@@ -1,7 +1,7 @@
 import isFunction from "@std-types/is-function";
 import isInstanceOf from "@std-types/is-instance-of";
 import isString from "@std-types/is-string";
-import assert from "assert";
+import assert = require("assert");
 
 export type AssertType<T> = (
   value: unknown,
