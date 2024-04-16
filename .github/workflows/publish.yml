@@ -94,7 +94,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
-          cd "dist/${{ matrix.package }}"
+          cd "${{ matrix.package }}"
           if ! [ -f "package.json" ]; then
             exit 0
           fi
