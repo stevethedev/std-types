@@ -1,5 +1,11 @@
 # @std-types/is-shaped-like
 
+## 2.1.0
+
+### Minor Changes
+
+- b0188eb: Add the `extend` function and `shape` object to the `getIsShapedLike` results.
+
 ## 2.0.0
 
 ### Patch Changes
