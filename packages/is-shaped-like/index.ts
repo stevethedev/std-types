@@ -36,7 +36,32 @@ export default function isShapedLike<T>(
   });
 }
 
-export const getIsShapedLike =
-  <T>(shape: Shape<T>): IsFn<T> =>
-  (value: unknown): value is T =>
-    isShapedLike(value, shape);
+export interface IsShapedLikeFn<T> {
+  (value: unknown): value is T;
+  readonly shape: Shape<T>;
+  readonly extend: ExtendFn<T>;
+}
+
+export type ExtensionFn<T, U> = (shape: Shape<T>) => Shape<U>;
+export interface ExtendFn<T> {
+  <U>(extensionFn: ExtensionFn<T, U>): IsShapedLikeFn<U>;
+  <U>(extension: Shape<U>): IsShapedLikeFn<Omit<T, keyof U> & U>;
+}
+
+export const getIsShapedLike = <T>(shape: Shape<T>): IsShapedLikeFn<T> => {
+  const isFn = (value: unknown): value is T => isShapedLike(value, shape);
+  function extend<U>(extensionFn: ExtensionFn<T, U>): IsShapedLikeFn<U>;
+  function extend<U>(
+    extensionShape: Shape<U>,
+  ): IsShapedLikeFn<Omit<T, keyof U> & U>;
+  function extend<U>(extensionFn: ExtensionFn<T, U> | Shape<U>) {
+    if (isFunction(extensionFn)) {
+      return getIsShapedLike(extensionFn(shape));
+    }
+    return getIsShapedLike({ ...shape, ...extensionFn });
+  }
+  return Object.assign(isFn, {
+    extend,
+    shape,
+  });
+};
