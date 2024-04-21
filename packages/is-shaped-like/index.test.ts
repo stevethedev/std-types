@@ -116,4 +116,79 @@ describe("isShapedLike", () => {
       "Expected function, got number",
     );
   });
+
+  it("maintains the shape in the returned function", () => {
+    const shape = {
+      a: isNumber,
+      b: isString,
+    };
+
+    const isShapedLikeShape = getIsShapedLike(shape);
+
+    expect(isShapedLikeShape.shape).toEqual(shape);
+  });
+
+  it("can use the saved shape for extension", () => {
+    const isShapedLikeShape = getIsShapedLike({
+      a: isNumber,
+      b: isString,
+    });
+
+    const isShapedLikeExtended = getIsShapedLike({
+      ...isShapedLikeShape.shape,
+      c: isBoolean,
+      b: isUndefined,
+    });
+
+    const value = {
+      a: 1,
+      c: true,
+    };
+
+    expect(isShapedLikeShape(value)).toBe(false);
+    expect(isShapedLikeExtended(value)).toBe(true);
+  });
+
+  it("can use the extend function with a shape", () => {
+    const isShapedLikeShape = getIsShapedLike({
+      a: isNumber,
+      b: isString,
+    });
+
+    const isShapedLikeExtended = isShapedLikeShape.extend({
+      c: isBoolean,
+    });
+
+    expect(isShapedLikeShape({ a: 1, b: "foo" })).toBe(true);
+    expect(isShapedLikeExtended({ a: 1, b: "foo" })).toBe(false);
+
+    expect(isShapedLikeShape({ a: 1, b: "foo", c: true })).toBe(true);
+    expect(isShapedLikeExtended({ a: 1, b: "foo", c: true })).toBe(true);
+  });
+
+  it("can use the extend function with an extension function", () => {
+    const isShapedLikeShape = getIsShapedLike({
+      a: isNumber,
+      b: isString,
+    });
+
+    const omit = <O, K extends keyof O>(o: O, keys: K[]): Omit<O, K> => {
+      const copy = { ...o };
+      keys.forEach((key) => delete copy[key]);
+      return copy;
+    };
+
+    const isShapedLikeExtended = isShapedLikeShape.extend((shape) => ({
+      ...omit(shape, ["b"]),
+      c: isBoolean,
+    }));
+
+    const value = {
+      a: 1,
+      c: true,
+    };
+
+    expect(isShapedLikeShape(value)).toBe(false);
+    expect(isShapedLikeExtended(value)).toBe(true);
+  });
 });
