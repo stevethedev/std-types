@@ -1,5 +1,5 @@
 {
-  "name": "@std-types/is-integer",
+  "name": "@std-types/is-integer-number",
   "description": "TypeScript Guard function for checking integer number values.",
   "version": "0.0.0",
   "private": true,
