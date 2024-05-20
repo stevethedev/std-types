@@ -1,4 +1,4 @@
-import isInteger from "packages/is-integer-number";
+import isInteger from "@std-types/is-integer-number";
 
 describe("isInteger", () => {
   it("should return true", () => {
