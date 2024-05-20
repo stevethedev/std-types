@@ -1,0 +1,9 @@
+{
+  "name": "@std-types/is-integer",
+  "description": "TypeScript Guard function for checking integer number values.",
+  "version": "0.0.0",
+  "private": true,
+  "peerDependencies": {
+    "@std-types/is-number": "*"
+  }
+}
