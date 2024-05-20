@@ -1,0 +1,9 @@
+{
+  "name": "@std-types/is-valid-number",
+  "description": "TypeScript Guard for a non-NaN value.",
+  "version": "0.0.0",
+  "private": true,
+  "peerDependencies": {
+    "@std-types/is-number": "*"
+  }
+}

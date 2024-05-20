@@ -1,0 +1,9 @@
+{
+  "name": "@std-types/is-finite-number",
+  "description": "TypeScript Guard function for checking finite values.",
+  "version": "0.0.0",
+  "private": true,
+  "peerDependencies": {
+    "@std-types/is-number": "*"
+  }
+}
