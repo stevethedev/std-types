@@ -58,7 +58,7 @@ jobs:
         run: npm run build -- --suffix=${{ steps.get-suffix.outputs.suffix }} ${{ steps.get-changed-packages.outputs.changedPackages }}
 
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist
